@@ -42,4 +42,10 @@ public class MovementBird : MonoBehaviour
 
         }
     }
+
+    private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "Environment"){
+            Destroy(gameObject);
+        }
+    }
 }

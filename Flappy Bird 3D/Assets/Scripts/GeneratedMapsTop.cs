@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GeneratedMaps : MonoBehaviour
+public class GeneratedMapsTop : MonoBehaviour
 {
     [SerializeField]
     private GameObject bird;
@@ -28,13 +28,12 @@ public class GeneratedMaps : MonoBehaviour
         birdPosition = bird.GetComponent<Transform>();   
         minDistance = (int)birdPosition.position.x -DistanceValue;
         maxDistance = (int)birdPosition.position.x +DistanceValue;
-        for (int x = minDistance; x <= maxDistance; x+=2){
-            int getPlatform = Random.Range(0, PlatformTop.Length);
-            int randomRotation = Random.Range(0,rotationDegree.Length);
-            var allPlatformTop = Instantiate(PlatformTop[getPlatform], new Vector3(x,6,0), Quaternion.Euler(rotationDegree[randomRotation],90,0));
-            platformList.Add(allPlatformTop);
-            allPlatformTop.transform.parent = transform;
-        }
+        // for (int x = minDistance; x <= maxDistance; x+=2){
+        //     int getPlatform = Random.Range(0, PlatformTop.Length);
+        //     int randomRotation = Random.Range(0,rotationDegree.Length);
+        //     var allPlatformTop = Instantiate(PlatformTop[getPlatform], new Vector3(x,6,0), Quaternion.Euler(rotationDegree[randomRotation],90,0));
+        //     platformList.Add(allPlatformTop);
+        // }
     }
 
     void Update()
@@ -64,11 +63,11 @@ public class GeneratedMaps : MonoBehaviour
         }
         //checking if the platform out of distance then we can destroy it
         for (int x = 0; x < platformList.Count; x++){
-            if (platformList[x].transform.position.x < minDistance || platformList[x].transform.position.x > maxDistance){
+            if (platformList[x].transform.position.x < (minDistance-4) || platformList[x].transform.position.x > (maxDistance+4)){
                 Destroy(platformList[x]);
                 platformList.RemoveAt(x);
             }
         }
-        Debug.Log(platformList.Count);
+        // Debug.Log(platformList.Count);
     }
 }
