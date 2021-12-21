@@ -18,13 +18,14 @@ public class MovementBird : MonoBehaviour
     private float ZrotationPos;
 
     public GameObject fire;
+    public GameObject BirdDestroyed;
+    public GameObject Explosion;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
         speedTranslate = minSpeed;
         fire.GetComponent<ParticleSystem>().Stop(true);
     }
-    private float startGas = 1f;
     private void Update() {
         transform.Translate(speedTranslate*Time.deltaTime,0,0);
         if (Input.GetKey(KeyCode.UpArrow) && speedTranslate < maxSpeed){
@@ -50,7 +51,9 @@ public class MovementBird : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "Environment"){
-            Destroy(gameObject);
+            Instantiate(Explosion, transform.position, transform.rotation);
+            Instantiate(BirdDestroyed, transform.position, transform.rotation);
+            gameObject.SetActive(false);
         }
     }
 }

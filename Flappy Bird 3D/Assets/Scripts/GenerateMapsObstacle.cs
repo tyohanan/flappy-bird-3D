@@ -36,7 +36,7 @@ public class GenerateMapsObstacle : MonoBehaviour
         int randomRotation = Random.Range(0,rotationDegree.Length);
         int posObstacle = Random.Range(0,2);
         int posObstacleDegree = 0;
-        Debug.Log(posObstacle);
+
         if (posObstacle == 0){
             posObstacleDegree = 0;
             height = Random.Range(0.5f, 1f);
